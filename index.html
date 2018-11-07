@@ -53,7 +53,7 @@
 
 	// to be replaced with user input
 	// will change num to immutable
-	let num = ' $415.9367 ';
+	let num = ' $412.9367 ';
 	// clean up the input
 	num = num.trim().replace('$', '');
 	num = parseFloat(num).toFixed(2).toString();
@@ -79,7 +79,23 @@
 	      tml = arr.pop(),
 	      hml = arr.pop();
 
-
+	function fTen(ten, one) {
+		let string = '';
+		if(parseInt(ten) === 0) {
+			string = `${ones[one]}`;
+		} else if(parseInt(ten) === 1 && parseInt(one) === 0) {
+			string = `${tens[ten]}`;
+		} else if(parseInt(ten) === 1 && parseInt(one) > 0) {
+			string = `${teens[one]}`;
+		} else if(parseInt(ten) > 1 && parseInt(one) === 0) {
+			string = `${tens[ten]}`;
+		} else {
+			string = `${tens[ten]} ${ones[one]}`;
+		}
+		return string.trim();
+	}
+	
+	console.log(fTen(ten, one));
 
 </script>
 </body>
