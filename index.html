@@ -26,7 +26,7 @@
 		8: 'eight',
 		9: 'nine',
 	};
-	
+
 	const teens = {
 		1: 'eleven',
 		2: 'twelve',
@@ -50,19 +50,35 @@
 		8: 'eighty',
 		9: 'ninety',
 	};
-	
+
 	// to be replaced with user input
 	// will change num to immutable
 	let num = ' $415.12 ';
 	// clean up the input
 	num = num.trim().replace('$', '');
 	num = num.split('.');
-	
+
 	const dlr = num[0].padStart(9,'0'); // ES17 padding, might need a polly
 	const cnt = num[1];
 	console.log(dlr);
 	console.log(cnt);
-	
+
+	let arr = dlr.split("");
+
+	// Don't really need to do this, could just access
+	// the array by index, creating variables just helps
+	// with legibility
+	const one = arr.pop(),
+	      ten = arr.pop(),
+	      hun = arr.pop(),
+	      tho = arr.pop(),
+	      tth = arr.pop(),
+	      hth = arr.pop(),
+	      mil = arr.pop(),
+	      tml = arr.pop(),
+	      hml = arr.pop();
+
+
 </script>
 </body>
 </html>
