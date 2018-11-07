@@ -53,7 +53,7 @@
 
 	// to be replaced with user input
 	// will change num to immutable
-	let num = ' $1606402.9367 ';
+	let num = ' $642402.9367 ';
 	// clean up the input
 	num = num.trim().replace('$', '');
 	num = parseFloat(num).toFixed(2).toString();
@@ -100,18 +100,24 @@
 		return string.trim();
 	}
 
-	function fTho(hth, tth, tho, base) {
-		const baseString = base = 'T' ? 'thousand' : 'million';
-		const hunTho = parseInt(hth) > 0 ? `${ones[hth]} hundred and`: '';
-		const tenTho = fTen(tth, tho);
-		const string = `${hunTho} ${tenTho} ${baseString}`;
+	function fTho(hth, tth, tho) {
+		const hunTho = parseInt(hth) > 0 ? `${ones[hth]} hundred`: '';
+		const tenTho = parseInt(tth) > 0 ? fTen(tth, tho) : '';
+		const string = `${hunTho} ${tenTho}`;
 		return string.trim();
 	}
 	
-	console.log(fTho(hml, tml, mil, 'M'));
-	console.log(fTho(hth, tth, tho, 'T'));
-	console.log(fHun(hun));
-	console.log(fTen(ten, one));
+	function fString() {
+		
+	}
+	const million = parseInt(mil + tml + hml) > 0 ? `${fTho(hml, tml, mil)} million` : '';
+	const thousand = parseInt(tho + tth + hth) > 0 ? `${fTho(hth, tth, tho)} thousand` : '';
+	const hundred = fHun(hun);
+	const tenString = fTen(ten, one);
+	
+	const fullString = `${million} ${thousand} ${hundred} ${tenString}`;
+	
+	console.log(fullString);
 
 </script>
 </body>
