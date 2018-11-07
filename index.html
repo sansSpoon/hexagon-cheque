@@ -53,9 +53,10 @@
 
 	// to be replaced with user input
 	// will change num to immutable
-	let num = ' $415.12 ';
+	let num = ' $415.9367 ';
 	// clean up the input
 	num = num.trim().replace('$', '');
+	num = parseFloat(num).toFixed(2).toString();
 	num = num.split('.');
 
 	const dlr = num[0].padStart(9,'0'); // ES17 padding, might need a polly
@@ -67,7 +68,7 @@
 
 	// Don't really need to do this, could just access
 	// the array by index, creating variables just helps
-	// with legibility
+	// with legibility, also arr is now dead.
 	const one = arr.pop(),
 	      ten = arr.pop(),
 	      hun = arr.pop(),
@@ -77,6 +78,7 @@
 	      mil = arr.pop(),
 	      tml = arr.pop(),
 	      hml = arr.pop();
+
 
 
 </script>
