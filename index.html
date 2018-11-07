@@ -53,7 +53,7 @@
 
 	// to be replaced with user input
 	// will change num to immutable
-	let num = ' $396412.9367 ';
+	let num = ' $1606402.9367 ';
 	// clean up the input
 	num = num.trim().replace('$', '');
 	num = parseFloat(num).toFixed(2).toString();
@@ -96,20 +96,22 @@
 	}
 
 	function fHun(hun) {
-		let string = `${ones[hun]} hundred`;
+		const string = `${ones[hun]} hundred and`;
 		return string.trim();
 	}
 
-	function fTho(hth, tth, tho) {
-		let hun = `${ones[hth]}`;
-		let ten = fTen(tth, tho);
-		let string = `${hun} ${ten} thousand`;
+	function fTho(hth, tth, tho, base) {
+		const baseString = base = 'T' ? 'thousand' : 'million';
+		const hunTho = parseInt(hth) > 0 ? `${ones[hth]} hundred and`: '';
+		const tenTho = fTen(tth, tho);
+		const string = `${hunTho} ${tenTho} ${baseString}`;
 		return string.trim();
 	}
 	
+	console.log(fTho(hml, tml, mil, 'M'));
+	console.log(fTho(hth, tth, tho, 'T'));
+	console.log(fHun(hun));
 	console.log(fTen(ten, one));
-	console.log(fTen(hun));
-	console.log(fTho(hth, tth, tho));
 
 </script>
 </body>
