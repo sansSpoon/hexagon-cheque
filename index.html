@@ -53,7 +53,7 @@
 
 	// to be replaced with user input
 	// will change num to immutable
-	let num = ' $1023 ';
+	let num = ' $912125118 ';
 	// clean up the input
 	num = num.trim().replace('$', '');
 	num = parseFloat(num).toFixed(2).toString();
@@ -102,6 +102,10 @@
 			return ' ';
 		}
 	}
+	
+	function sumTho(x100, x10, x1) {
+		return parseInt(x100) + parseInt(x10) + parseInt(x1);
+	}
 
 	function period(x100, x10, x1, last) {
 		const hundred = parseInt(x100) > 0 ? `${ones[x100]} hundred`: '';
@@ -122,7 +126,7 @@
 	const oString = parseInt(one + ten + hun) > 0 ? `${period(hun, ten, one)}` : '';
 	
 	
-	const fullString = `${mString}${tJoin(mil, hth)}${tString}${tJoin(tho, hun)}${oString} dollars`.trim();
+	const fullString = `${mString} ${tString}${tJoin(sumTho(tho, tth, hth), hun)}${oString} dollars`.trim();
 	
 	console.log(fullString);
 
