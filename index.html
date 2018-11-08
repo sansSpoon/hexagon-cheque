@@ -53,9 +53,9 @@
 
 	// to be replaced with user input
 	// will change num to immutable
-	let num = ' $912125118 ';
+	let num = ' $912,125,118.12 ';
 	// clean up the input
-	num = num.trim().replace('$', '');
+	num = num.trim().replace('$', '').replace(/,/g,'');
 	num = parseFloat(num).toFixed(2).toString();
 	num = num.split('.');
 
@@ -107,7 +107,7 @@
 		return parseInt(x100) + parseInt(x10) + parseInt(x1);
 	}
 
-	function period(x100, x10, x1, last) {
+	function period(x100, x10, x1) {
 		const hundred = parseInt(x100) > 0 ? `${ones[x100]} hundred`: '';
 		const ten = parseInt(x1 + x10) > 0 ? fTen(x10, x1) : '';
 		let and = ' and';
