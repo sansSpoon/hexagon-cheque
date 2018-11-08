@@ -53,7 +53,7 @@
 
 	// to be replaced with user input
 	// will change num to immutable
-	let num = ' $99900000 ';
+	let num = ' $101511 ';
 	// clean up the input
 	num = num.trim().replace('$', '').replace(/,/g,'');
 	num = parseFloat(num).toFixed(2).toString();
@@ -106,7 +106,8 @@
 	}
 	
 	function sumTho(x100, x10, x1) {
-		return parseInt(x100) + parseInt(x10) + parseInt(x1);
+		const sum = parseInt(x100) + parseInt(x10) + parseInt(x1);
+		return sum;
 	}
 
 	function period(x100, x10, x1) {
@@ -136,12 +137,15 @@
 	}
 
 	const mString = parseInt(mil + tml + hml) > 0 ? `${period(hml, tml, mil)} million` : '';
-	const tString = parseInt(tho + tth + hth) > 0 ? ` ${period(hth, tth, tho)} thousand` : '';
+	const tString = parseInt(tho + tth + hth) > 0 ? `${period(hth, tth, tho)} thousand` : '';
 	const oString = parseInt(one + ten + hun) > 0 ? `${period(hun, ten, one)}` : '';
 
-	const dString = `${mString}${tString.length>0?tString:''}${oString.length>0?tJoin(sumTho(tho, tth, hth), hun):''}${oString} dollars`;
+	const dString = `${mString} ${tString.length>0?tString:''}${oString.length>0?tJoin(sumTho(mil, tml, hml), hth):''}${oString.length>0?tJoin(sumTho(tho, tth, hth), hun):''}${oString} dollars`;
 	
-	console.log(`${dString}${cents(cnt.substring(0,1), cnt.substring(1,2))}`);
+	// This is a bit hacky, need to improve joining
+	const dStringClean = dString.replace(/\s\s/g, ' ').trim();
+	
+	console.log(`${dStringClean}${cents(cnt.substring(0,1), cnt.substring(1,2))}`);
 
 </script>
 </body>
