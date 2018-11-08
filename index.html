@@ -53,7 +53,7 @@
 
 	// to be replaced with user input
 	// will change num to immutable
-	let num = ' $912,125,118.556743 ';
+	let num = ' $99900000 ';
 	// clean up the input
 	num = num.trim().replace('$', '').replace(/,/g,'');
 	num = parseFloat(num).toFixed(2).toString();
@@ -124,18 +124,22 @@
 	}
 	
 	function cents(x10, x1) {
-		const string = parseInt(x10 + x1) > 0 ? ` and ${fTen(x10, x1)} cents` : ' only';
+		let string = '';
+		if(parseInt(x10 + x1) === 1) {
+			string = ' and one cent'
+		} else if(parseInt(x10 + x1) > 1) {
+			string = ` and ${fTen(x10, x1)} cents`;
+		} else {
+			string = ' only';
+		}
 		return string;
 	}
 
 	const mString = parseInt(mil + tml + hml) > 0 ? `${period(hml, tml, mil)} million` : '';
-	const tString = parseInt(tho + tth + hth) > 0 ? `${period(hth, tth, tho)} thousand` : '';
+	const tString = parseInt(tho + tth + hth) > 0 ? ` ${period(hth, tth, tho)} thousand` : '';
 	const oString = parseInt(one + ten + hun) > 0 ? `${period(hun, ten, one)}` : '';
-	
-	
-	const dString = `${mString} ${tString}${tJoin(sumTho(tho, tth, hth), hun)}${oString} dollars`.trim();
-	
-	
+
+	const dString = `${mString}${tString.length>0?tString:''}${oString.length>0?tJoin(sumTho(tho, tth, hth), hun):''}${oString} dollars`;
 	
 	console.log(`${dString}${cents(cnt.substring(0,1), cnt.substring(1,2))}`);
 
