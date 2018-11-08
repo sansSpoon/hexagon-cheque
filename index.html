@@ -53,7 +53,7 @@
 
 	// to be replaced with user input
 	// will change num to immutable
-	let num = ' $642402.9367 ';
+	let num = ' $1023 ';
 	// clean up the input
 	num = num.trim().replace('$', '');
 	num = parseFloat(num).toFixed(2).toString();
@@ -81,7 +81,7 @@
 
 	function fTen(ten, one) {
 		let string = '';
-		if(parseInt(ten) === 0) {
+		if(parseInt(ten) === 0 && parseInt(one) > 0) {
 			string = `${ones[one]}`;
 		} else if(parseInt(ten) === 1 && parseInt(one) === 0) {
 			string = `${tens[ten]}`;
@@ -95,27 +95,34 @@
 		return string.trim();
 	}
 
-	function fHun(hun) {
-		const string = `${ones[hun]} hundred and`;
+	function tJoin(x1000, x100)	{
+		if(parseInt(x1000) > 0 && parseInt(x100) === 0) {
+			return ' and ';
+		} else {
+			return ' ';
+		}
+	}
+
+	function period(x100, x10, x1, last) {
+		const hundred = parseInt(x100) > 0 ? `${ones[x100]} hundred`: '';
+		const ten = parseInt(x1 + x10) > 0 ? fTen(x10, x1) : '';
+		let and = ' and';
+		if(parseInt(x100) === 0 && (parseInt(x10) > 0 || parseInt(x1) > 0)){
+			and = '';
+		}
+		if(parseInt(x100) > 0 && parseInt(x10) === 0 && parseInt(x1) === 0){
+			and = '';
+		}
+		const string = `${hundred}${and} ${ten}`;
 		return string.trim();
 	}
 
-	function fTho(hth, tth, tho) {
-		const hunTho = parseInt(hth) > 0 ? `${ones[hth]} hundred`: '';
-		const tenTho = parseInt(tth) > 0 ? fTen(tth, tho) : '';
-		const string = `${hunTho} ${tenTho}`;
-		return string.trim();
-	}
+	const mString = parseInt(mil + tml + hml) > 0 ? `${period(hml, tml, mil)} million` : '';
+	const tString = parseInt(tho + tth + hth) > 0 ? `${period(hth, tth, tho)} thousand` : '';
+	const oString = parseInt(one + ten + hun) > 0 ? `${period(hun, ten, one)}` : '';
 	
-	function fString() {
-		
-	}
-	const million = parseInt(mil + tml + hml) > 0 ? `${fTho(hml, tml, mil)} million` : '';
-	const thousand = parseInt(tho + tth + hth) > 0 ? `${fTho(hth, tth, tho)} thousand` : '';
-	const hundred = fHun(hun);
-	const tenString = fTen(ten, one);
 	
-	const fullString = `${million} ${thousand} ${hundred} ${tenString}`;
+	const fullString = `${mString}${tJoin(mil, hth)}${tString}${tJoin(tho, hun)}${oString} dollars`.trim();
 	
 	console.log(fullString);
 
