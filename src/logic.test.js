@@ -49,3 +49,15 @@ test('returns "fifty" when parameters are 0,5,0', () => {
 test('returns "one hundred and fifty" when parameters are 1,5,0', () => {
 	expect(period(1, 5, 0)).toBe('one hundred and fifty');
 });
+
+test('removes commas from input', () => {
+	expect(cleanAmount('1,012,234.12')).toBe('1012234.12');
+});
+
+test('rounds to two decimal places', () => {
+	expect(cleanAmount('1,012,234.1256')).toBe('1012234.13');
+});
+
+test('Removes dollar symbols and trims whitespace', () => {
+	expect(cleanAmount(' $1,012,234.1256  ')).toBe('1012234.13');
+});
