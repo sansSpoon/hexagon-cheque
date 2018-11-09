@@ -7,7 +7,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			amount: '0',
+			amount: '',
 			one: '',
 			ten: '',
 			hun: '',
@@ -81,11 +81,21 @@ class App extends Component {
 		
 		const dStringClean = dString.replace(/\s\s/g, ' ').trim().toUpperCase(); // This is a bit hacky, need to improve joining
 		const cString = cnt === undefined ? '' : cents(cnt.substring(0,1), cnt.substring(1,2)).toUpperCase();
+		
+		let placeHolder;
+		
+		if(this.state.oor === true) {
+			placeHolder = 'Maximum amount reached, please enter a lower amount';
+		} else if(this.state.amount === '0' || this.state.amount === '') {
+			placeHolder = '';
+		} else {
+			placeHolder = `${dStringClean}${cString}`;
+		}
 
 		return (
 			<div className="App">
 				<header className="App-header">
-					<h1>Check Wordifier</h1>
+					<h1>Cheque Wordifier</h1>
 				</header>
 				<main className="App-main">
 					<div>
@@ -93,7 +103,7 @@ class App extends Component {
 						<input id="amount" name="amount" type="text" value={this.state.amount} onChange={this.handleChange} />
 					</div>
 					<div className="output">
-						{ (this.state.oor === true) ? 'Maximum amount reached, please enter a lower amount' : `${dStringClean}${cString}` }
+						{ placeHolder }
 					</div>
 				</main>
 			</div>
