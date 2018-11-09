@@ -21,3 +21,15 @@ test('returns "fifteen" when param1 is 1 and param2 is 5', () => {
 test('returns "sixty" when param1 is 6 and param2 is 0', () => {
 	expect(fTen(6, 0)).toBe('sixty');
 });
+
+test('returns " and one cent" when sum of parameters equal 1', () => {
+	expect(cents(0, 1)).toBe(' and one cent');
+});
+
+test('returns " only" when sum of parameters equal 0', () => {
+	expect(cents(0, 0)).toBe(' only');
+});
+
+test('returns " and XX cents" when sum of parameters greater than 0', () => {
+	expect(cents(5, 4)).toBe(' and fifty four cents');
+});
