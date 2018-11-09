@@ -85,14 +85,17 @@ class App extends Component {
 		return (
 			<div className="App">
 				<header className="App-header">
+					<h1>Check Wordifier</h1>
+				</header>
+				<main className="App-main">
 					<div>
 						<label htmlFor="amount">Enter an amount for the cheque</label>
 						<input id="amount" name="amount" type="text" value={this.state.amount} onChange={this.handleChange} />
 					</div>
-					<div>
+					<div className="output">
 						{ (this.state.oor === true) ? 'Maximum amount reached, please enter a lower amount' : `${dStringClean}${cString}` }
 					</div>
-				</header>
+				</main>
 			</div>
 		);
 	}
