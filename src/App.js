@@ -73,10 +73,8 @@ class App extends Component {
 		
 		const dString = `${mString} ${tString.length>0?tString:''}${oString.length>0?tJoin(sumTho(mil, tml, hml), hth):''}${oString.length>0?tJoin(sumTho(tho, tth, hth), hun):''}${oString} dollars`;
 		
-		// This is a bit hacky, need to improve joining
-		const dStringClean = dString.replace(/\s\s/g, ' ').trim().toUpperCase();
-		
-		const cString = cents(cnt.substring(0,1), cnt.substring(1,2)).toUpperCase();
+		const dStringClean = dString.replace(/\s\s/g, ' ').trim().toUpperCase(); // This is a bit hacky, need to improve joining
+		const cString = cnt === undefined ? '' : cents(cnt.substring(0,1), cnt.substring(1,2)).toUpperCase();
 
 		return (
 			<div className="App">
