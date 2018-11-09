@@ -33,3 +33,19 @@ test('returns " only" when sum of parameters equal 0', () => {
 test('returns " and XX cents" when sum of parameters greater than 0', () => {
 	expect(cents(5, 4)).toBe(' and fifty four cents');
 });
+
+test('returns "five" when parameters are 0,0,5', () => {
+	expect(period(0, 0, 5)).toBe('five');
+});
+
+test('returns "fifteen" when parameters are 0,1,5', () => {
+	expect(period(0, 1, 5)).toBe('fifteen');
+});
+
+test('returns "fifty" when parameters are 0,5,0', () => {
+	expect(period(0, 5, 0)).toBe('fifty');
+});
+
+test('returns "one hundred and fifty" when parameters are 1,5,0', () => {
+	expect(period(1, 5, 0)).toBe('one hundred and fifty');
+});
