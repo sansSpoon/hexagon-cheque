@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { tJoin, sumTho, period, cents } from './logic';
-import logo from './logo.svg';
 import './App.css';
 
 // to be replaced with user input
@@ -45,26 +44,37 @@ const dStringClean = dString.replace(/\s\s/g, ' ').trim();
 console.log(`${dStringClean}${cents(cnt.substring(0,1), cnt.substring(1,2))}`);
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	
+	constructor(props) {
+		super(props);
+		this.state = {
+			amount: '0',
+		};
+		this.handleChange = this.handleChange.bind(this);
+	}
+	
+	handleChange(event) {
+		const target = event.target;
+		const value = target.type === 'checkbox' ? target.checked : target.value;
+		const name = target.name;
+		this.setState({[name]: value });
+	}
+	
+	render() {
+		return (
+			<div className="App">
+				<header className="App-header">
+					<div>
+						<label htmlFor="amount">Enter an amount for the cheque</label>
+						<input id="amount" name="amount" type="text" value={this.state.amount} onChange={this.handleChange} />
+					</div>
+					<div>
+						{"string to go here"}
+					</div>
+				</header>
+			</div>
+		);
+	}
 }
 
 export default App;
