@@ -88,3 +88,9 @@ export function cents(x10, x1) {
 	}
 	return string;
 }
+
+export function cleanAmount(num) {
+	num = num.trim().replace('$', '').replace(/,/g,'');
+	num = parseFloat(num).toFixed(2).toString();
+	return num;
+}

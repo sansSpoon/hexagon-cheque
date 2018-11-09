@@ -1,24 +1,8 @@
 import React, { Component } from 'react';
-import { tJoin, sumTho, period, cents } from './logic';
+import { tJoin, sumTho, period, cents, cleanAmount } from './logic';
 import './App.css';
 
-// to be replaced with user input
-// will change num to immutable
-let num = ' $101511 ';
-// clean up the input
-num = num.trim().replace('$', '').replace(/,/g,'');
-num = parseFloat(num).toFixed(2).toString();
-num = num.split('.');
-
-const dlr = num[0].padStart(9,'0'); // ES17 padding, might need a polly
-const cnt = num[1];
-console.log(dlr);
-console.log(cnt);
-console.log(cnt.substring(0,1));
-console.log(cnt.substring(1,2));
-
-let arr = dlr.split("");
-
+let arr = [];
 // Don't really need to do this, could just access
 // the array by index, creating variables just helps
 // with legibility, also arr is now dead.
@@ -44,22 +28,44 @@ const dStringClean = dString.replace(/\s\s/g, ' ').trim();
 console.log(`${dStringClean}${cents(cnt.substring(0,1), cnt.substring(1,2))}`);
 
 class App extends Component {
-	
+
 	constructor(props) {
 		super(props);
 		this.state = {
 			amount: '0',
+			one: '',
+			ten: '',
+			hun: '',
+			tho: '',
+			tth: '',
+			hth: '',
+			mil: '',
+			tml: '',
+			hml: '',
+			cnt: '',
 		};
 		this.handleChange = this.handleChange.bind(this);
 	}
-	
+
 	handleChange(event) {
 		const target = event.target;
 		const value = target.type === 'checkbox' ? target.checked : target.value;
 		const name = target.name;
 		this.setState({[name]: value });
 	}
-	
+
+	componentDidUpdate(prevProps, prevState, snapshot) {
+		if(prevState.amount !== this.state.amount) {
+			const cleaned = cleanAmount(this.state.amount).split('.');
+			const dlr = cleaned[0].padStart(9,'0'); // ES17 padding, might need a polly
+			const cnt = cleaned[1];
+
+			this.setState({cnt: cnt });
+
+			let arr = dlr.split("");
+		}
+	}
+
 	render() {
 		return (
 			<div className="App">
