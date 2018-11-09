@@ -18,14 +18,20 @@ class App extends Component {
 			tml: '',
 			hml: '',
 			cnt: '',
+			oor: false,
 		};
 		this.handleChange = this.handleChange.bind(this);
 	}
 
 	handleChange(event) {
 		const target = event.target;
-		const value = target.type === 'checkbox' ? target.checked : target.value;
+		const value = target.value;
 		const name = target.name;
+		if(parseFloat(cleanAmount(value)) > 974790317.77) {
+			this.setState({oor: true });
+		} else {
+			this.setState({oor: false });
+		}
 		this.setState({[name]: value });
 	}
 
@@ -84,7 +90,7 @@ class App extends Component {
 						<input id="amount" name="amount" type="text" value={this.state.amount} onChange={this.handleChange} />
 					</div>
 					<div>
-						{ `${dStringClean}${cString}` }
+						{ (this.state.oor === true) ? 'Maximum amount reached, please enter a lower amount' : `${dStringClean}${cString}` }
 					</div>
 				</header>
 			</div>
